@@ -19,7 +19,7 @@ const filterProducts = (products = [], category) => {
   : products.filter((p) => { p.category.toLowerCase() === category.toLowerCase() });
 }
 
-export const ShooConnector = connect(mapStateToProps, mapDispatchToProps)(
+export const ShopConnector = connect(mapStateToProps, mapDispatchToProps)(
   class extends Component {
 
     componentDidMount() {
