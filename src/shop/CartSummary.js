@@ -7,7 +7,7 @@ export class CartSummary extends Component {
     if(this.props.cartItems > 0) {
       return (
         <span>
-          {this.props.cartItems} item(s)
+          {this.props.cartItems} item(s),
           ${this.props.cartPrice.toFixed(2)}
         </span>
       )
@@ -16,9 +16,9 @@ export class CartSummary extends Component {
     }
   }
 
-  getLinkClass = () => {
+  getLinkClasses = () => {
     return `btn btn-sm bg-dark text-white
-      ${this.props.cartItems === 0 ? "disabled" : ""}`
+      ${this.props.cartItems === 0 ? "disabled" : ""}`;
   }
 
   render() {
@@ -26,7 +26,7 @@ export class CartSummary extends Component {
       <div className="float-right">
         <small>
           {this.getSummary()}
-          <Link className={ this.getLinkClass() } to="/shop/cart">
+          <Link className={ this.getLinkClasses() } to="/shop/cart">
             <i className="fa fa-shopping-cart"></i>
           </Link>
         </small>
