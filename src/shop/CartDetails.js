@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { CartDetailsRows } from './CartDetailsRows';
 
-export default class CartDetails extends Component {
+export class CartDetails extends Component {
 
   getLinkClasses = () => {
     return `btn btn-secondary m-1
