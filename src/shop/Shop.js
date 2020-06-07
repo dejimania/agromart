@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { CategoryNavigation } from './CategoryNavigation';
-import { ProductList } from './ProductList'
+import { CategoryNavigation } from '../shop/CategoryNavigation';
+import { ProductList } from '../shop/ProductList';
 
-export default class Shop extends Component {
+export class Shop extends Component {
+  
   render() {
     return (
       <div className="container-fluid">
