@@ -4,6 +4,11 @@ import { ProductList } from '../shop/ProductList';
 import { CartSummary } from './CartSummary';
 
 export class Shop extends Component {
+
+  handleAddToCart = (...args) => {
+    this.props.addToCart(...args);
+    this.props.history.push("/shop/cart");
+  }
   
   render() {
     return (
@@ -20,7 +25,7 @@ export class Shop extends Component {
           </div>
           <div className="col-9 p-2">
             <ProductList products={ this.props.products }
-              addToCart= { this.props.addToCart }
+              addToCart= { this.handleAddToCart }
             />
           </div>
         </div>
