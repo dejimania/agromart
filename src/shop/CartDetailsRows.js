@@ -40,10 +40,5 @@ export class CartDetailsRows extends Component {
         </React.Fragment>
       )
     }
-    return (
-      <div>
-        
-      </div>
-    )
   }
 }
