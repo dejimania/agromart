@@ -9,7 +9,7 @@ export class Shop extends Component {
       <div className="container-fluid">
         <div className="row">
           <div className="col bg-dark text-white">
-            <div className="navbar-brand">Agro Mart</div>
+            <div className="navbar-brand">AGRO MART</div>
           </div>
         </div>
         <div className="row">
