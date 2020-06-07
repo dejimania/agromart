@@ -5,6 +5,7 @@ import { loadData } from '../data/ActionCreators';
 import { DataTypes } from '../data/Types';
 import { Shop } from '../shop/Shop';
 import { addToCart, updateCartQuantity, removeFromCart, clearCart } from '../data/CartActionCreators';
+import { CartDetails } from './CartDetails';
 
 const mapStateToProps = (dataStore) => ({
   ...dataStore
@@ -36,6 +37,11 @@ export const ShopConnector = connect(mapStateToProps, mapDispatchToProps)(
                   routeProps.match.params.category)}
               />
             }}
+          />
+          <Route path="/shop/cart"
+            render={ (routeProps) => {
+              return <CartDetails { ...this.props} { ...routeProps }/>
+            } }
           />
           <Redirect to="/shop/products" />
         </Switch>
