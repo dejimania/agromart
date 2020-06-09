@@ -1,5 +1,5 @@
 const isPromise = (payload) => {
-  (typeof(payload) === "object" || typeof(payload) === "function")
+  return (typeof(payload) === "object" || typeof(payload) === "function")
     && typeof(payload.then) === "function";
 }
 
