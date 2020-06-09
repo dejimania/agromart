@@ -3,9 +3,9 @@ import { RestUrls } from './Urls'
 
 export class RestDataSource {
 
-  getData = (dataType) => {
-    return this.sendRequest("get", RestUrls[dataType]);
+  getData = (dataType, params) => {
+    return this.sendRequest("get", RestUrls[dataType], params);
   }
 
-  sendRequest = (method, url) => Axios.request({ method, url });
+  sendRequest = (method, url, params) => Axios.request({ method, url, params });
 }
