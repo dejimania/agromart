@@ -1,7 +1,6 @@
 import { ActionTypes } from './Types';
 // import { data as phData } from './placeholderData';
 import { RestDataSource } from './RestDataSource';
-// import { response } from 'express';
 
 const dataSource = new RestDataSource();
 

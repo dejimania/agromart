@@ -4,7 +4,7 @@ const isPromise = (payload) => {
 }
 
 export const asyncActions = () => (next) => (action) => {
-  if(isPromise.payload) {
+  if(isPromise(action.payload)) {
     action.payload.then(result => next({ ...action, payload: result }));
   } else {
     next(action);
