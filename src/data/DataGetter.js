@@ -9,7 +9,7 @@ export class DataGetter extends Component {
       _limit: this.props.pageSize || 5,
       _sort: this.props.sortKey || "name",
       _page: this.props.match.params.page || 1,
-      category_like: (this.props.match.params.category) === "all"
+      category_like: (this.props.match.params.category || "") === "all"
         ? "" : this.props.match.params.category
     };
 
