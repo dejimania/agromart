@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { DataTypes } from '../data/Types';
+// import { loadData } from '../data/ActionCreators'
 
 export class DataGetter extends Component {
   
@@ -12,7 +13,7 @@ export class DataGetter extends Component {
       category_like: (this.props.match.params.category || "") === "all"
         ? "" : this.props.match.params.category
     };
-
+    
     if(Object.keys(rtData).find((key) => dsData[key] !== rtData[key])) {
       this.props.loadData(DataTypes.PRODUCTS, rtData);
     }

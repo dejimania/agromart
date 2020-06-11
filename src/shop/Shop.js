@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CategoryNavigation } from '../shop/CategoryNavigation';
 import { ProductList } from '../shop/ProductList';
 import { CartSummary } from './CartSummary';
+import { ErrorBoundary } from '../shop/ErrorBoundary';
 
 export class Shop extends Component {
 
@@ -21,12 +22,16 @@ export class Shop extends Component {
         </div>
         <div className="row">
           <div className="col-3 p-2">
-            <CategoryNavigation baseUrl="/shop/products" categories={ this.props.categories} />
+            <CategoryNavigation baseUrl="/shop/products"
+              categories={ this.props.categories} />
           </div>
           <div className="col-9 p-2">
-            <ProductList products={ this.props.products }
-              addToCart= { this.handleAddToCart }
-            />
+            <ErrorBoundary>
+              <ProductList products={ this.props.products }
+                addToCart= { this.handleAddToCart }
+              />
+            </ErrorBoundary>
+            
           </div>
         </div>
       </div>
