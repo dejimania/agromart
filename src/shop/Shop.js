@@ -3,6 +3,10 @@ import { CategoryNavigation } from '../shop/CategoryNavigation';
 import { ProductList } from '../shop/ProductList';
 import { CartSummary } from './CartSummary';
 import { ErrorBoundary } from '../shop/ErrorBoundary';
+import { ProductPageConnector } from './ProductPageConnector';
+import { PaginationControls } from '../PaginationControls';
+
+const ProductPages = ProductPageConnector(PaginationControls);
 
 export class Shop extends Component {
 
@@ -27,6 +31,7 @@ export class Shop extends Component {
           </div>
           <div className="col-9 p-2">
             <ErrorBoundary>
+              <ProductPages />
               <ProductList products={ this.props.products }
                 addToCart= { this.handleAddToCart }
               />

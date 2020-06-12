@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { WithRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { setPageSize, setSortProperty } from '../data/ActionCreators';
 
 const mapStateToProps = (dataStore) => dataStore;
