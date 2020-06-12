@@ -36,11 +36,11 @@ export class PaginationControls extends Component {
             })}
           </select>
           <select className="form-control"
-            onChange={ this.props.handleSortPropertyChange }
-            value= { this.props.sortKey || this.sortKey[0] }
+            onChange={ this.handleSortPropertyChange }
+            value= { this.props.sortKey || this.sortKeys[0] }
           >
             { this.sortKeys.map((k) => {
-              return <option value={k.lowerCase()} key={k}>
+              return <option value={k.toLowerCase()} key={k}>
                 Sort By { k }
               </option>
             })}
