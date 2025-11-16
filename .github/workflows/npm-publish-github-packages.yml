@@ -1,0 +1,79 @@
+name: Deploy APP to server
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build Next.js app
+        run: pnpm build
+
+      - name: Copy build artifacts to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SSH_PORT}}
+          source: ".next package.json pnpm-lock.yaml next.config.js public"
+          target: ${{ secrets.BUILD_DIR }}
+          timeout: 300s
+          script: |
+            mkdir -p ${{ secrets.BUILD_DIR }} || true
+            echo "Files copied successfully"
+
+      - name: SSH into server and deploy APP
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            # mkdir -p ${{ secrets.BUILD_DIR }} || true
+            cd ${{ secrets.BUILD_DIR }}
+
+            echo "🔧 Checking and installing Node.js if not installed..."
+            if ! command -v node >/dev/null 2>&1; then
+              curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+            fi
+
+            echo "🔧 Checking and installing pnpm if needed..."
+            if ! command -v pnpm >/dev/null 2>&1; then
+              npm install -g pnpm
+            fi
+
+            echo "🔧 Checking and installing PM2 if needed..."
+            if ! command -v pm2 >/dev/null 2>&1; then
+              npm install -g pm2
+            fi
+
+            echo "📦 Installing production dependencies..."
+            pnpm install --prod --frozen-lockfile
+
+            echo "🚀 Restarting Next.js app with PM2..."
+            pm2 restart noorAI-FE || pm2 start "pnpm start" --name noorAI-FE --time
+
+            echo "✅ Deployment complete!"
